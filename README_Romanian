@@ -1,0 +1,225 @@
+Voi presupune folosirea conventiei CDECL pentru toate functiile.
+______________________________________________________________________________
+
+	Analiza unei functii va avea urmatorul format:
+
+	nume_functie() - scurta descriere
+@arg_1: descriere
+@arg_2: descriere
+	...
+@arg_n: descriere
+
+[Descriere amanuntita a functiei]
+
+BUG-URI:
+	- bug_1
+	- bug_2
+	  ...
+	- bug_k
+POSIBILE IMBUNATATIRI( se va presupune ca bug-urile au fost deja reparate ):
+	- imbunatatire_1
+	- imbunatatire_2
+	  ...
+	- imbunatatire_p
+
+Return: descriere pentru valoarea de retur
+Prototip: (tip val_retur) nume_functie( arg_1, ..., arg_n );
+______________________________________________________________________________
+
+	mystery1() - functie ce calculeaza lungimea unui sir de octeti
+		     terminat cu nul
+@string: adresa de inceput a sirului
+
+Functia are un singur argument. Acesta reprezinta adresa unui sir nul 
+terminat de octeti. Se intoarce lungimea sirului( fara terminator ).
+
+BUG-URI:
+	- Modificarea registrului EDI( nu respecta CDECL ).
+POSIBILE IMBUNATATIRI:
+	- Folosirea registrului ECX in loc de EBX pentru a nu mai fi nevoie
+	sa il salvam si sa il restauram.
+	- Nu se va mai incrementa EAX, ci se va calcula, la final, scazand
+	din adresa finala( cea cu '\0' ) pe cea initiala.
+Return: un intreg egal cu lungimea sirului;
+Prototip: int mystery1(char *string);
+______________________________________________________________________________
+
+	mystery2() - functie ce cauta prima aparitie a unui caracter intr-un
+		     sir de caractere
+@string: adresa de inceput a sirului
+@c: caracterul cautat
+
+Functia are doua argumente. Primul este adresa sirului in care se cauta
+caracterul. Al doilea este caracterul de cautat. Se parcurge sirul, 
+comparand la fiecare pas caracterul curent cu cel cautat. Se presupune ca
+daca sirul nu este gol atunci caracterul se va gasi cel putin o data in sir.
+
+BUG-URI:
+	- Modificarea registrului EBX( nu respecta CDECL ).
+POSIBILE IMBUNATATIRI 
+	- Nu se va mai incrementa EAX, ci se va calcula, la final, scazand
+	din adresa finala( cea cu '\0' ) pe cea initiala.
+	- Nu se mai foloseste functia strlen( mystery1 ) pentru a vedea daca
+	sirul este gol sau nu. Pur si simplu se verifica daca primul element
+	este sau nu terminatorul nul.
+Return: - "-1" daca sirul e gol, altfel indexul la care se
+	gaseste prima data caracterul
+Prototip: int mystery2( char *string, char c );
+______________________________________________________________________________
+
+	mystery3() - functie ce verifica egalitatea a doi vectori de octeti
+@v1: adresa primului vector
+@v2: adresa celui de-al doilea vector
+@n: lungimea vectorilor
+
+Functia are trei argumente. Primele doua reprezinta vectorii comparati.
+Al treilea argument reprezinta lungimea vectorilor. Functia compara, la
+fiecare pas, octetii de pe pozitia 'i' din fiecare vector. Daca sunt identici
+continua comparatia. Daca nu, se paraseste functia si se intoarce 1. Daca se
+ajunge la finalul celor n perechi de octeti si nu s-a gasit o pereche
+diferita atunci se intoarce 0.
+
+BUG-URI:
+	- Modificarea registrului EBX( nu respecta CDECL ).
+POSIBILE IMBUNATATIRI:
+Return: - 0 daca vectorii sunt egali, 1 altfel.
+Prototip: int mystery3( char *v1, char *v2, int n );
+______________________________________________________________________________
+
+	mystery4() - functie ce copiaza continutul unui vector de octeti in
+		     altul
+@destination: adresa primului vector
+@source: adresa celui de-al doilea vector
+@n: lungimea vectorilor
+
+Functia are trei argumente. Primul este vectorul de unde se copiaza si al
+doilea este vectorul in care se copiaza. Al treilea argument reprezinta 
+lungimea vectorilor. Functia copiaza, la fiecare pas, octetul de pe pozitia
+'i' din primul vector in cel de-al doilea.
+
+BUG-URI:
+	- Modificarea registrului EBX( nu respecta CDECL ).
+POSIBILE IMBUNATATIRI:
+Return: Nimic
+Prototip: void mystery4( char *destination, char *source, int n );
+______________________________________________________________________________
+
+	mystery5() - functie ce verifica daca un caracter este o cifra
+@c: caracterul examinat
+
+Functia are un argument, caracterul de examinat. Daca valoarea sa este mai mica
+decat '0' sau mai mare decat '9' se va intoarce 0. Altfel se intoarce 1.
+
+BUG-URI:
+POSIBILE IMBUNATATIRI:
+Return: 1 daca este cifra, 0 altfel.
+Prototip: int mystery5( char c );
+______________________________________________________________________________
+
+	mystery6() - functie ce inverseaza ordinea caracterelor unui sir
+		     de caracter nul terminat
+@string: adresa sirului de caractere
+
+Functia are un parametru. Acesta reprezinta adresa sirului nul terminat care
+va fi inversat. Se apeleaza functia mystery1, care este echivalenta cu un
+strlen. Folosind lungimea sirului se aloca memorie pe stiva pentru tot atatia
+octeti. Se copiaza in ordine inversa caracterele. Se apeleaza functia
+mystery4, care este echivalenta cu un memcpy si copiaza continutul vectorului
+de pe stiva la adresa sirului initial.
+
+BUG-URI:
+	- Modificarea registrelor EBX si EDI( nu respecta CDECL ).
+POSIBILE IMBUNATATIRI:
+Return: Nimic
+Prototip: void mystery6( char *string );
+______________________________________________________________________________
+
+	mystery7() - functie ce face conversia unui sir de caractere la un
+		     numar intreg
+@string: adresa sirului de caractere
+
+Functia are un parametru. Acesta reprezinta adresa sirului nul terminat care
+va fi convertit. Mai intai se calculeaza lungimea acestuia si apoi se
+inverseaza sirul pentru ca bucla functiei sa functioneze folosind
+instructiunea loop. La fiecare pas se verifica daca caracterul curent e cifra.
+Daca da, se adauga la valoarea curenta dupa ce aceasta este inmultita cu 10.
+Daca nu, se iese din bulca si functia intoarce -1. La final, se intoarce
+valoarea obtinuta.
+
+BUG-URI:
+	- Modificarea registrelor EBX si ESI( nu respecta CDECL ).
+POSIBILE IMBUNATATIRI:
+	- In loc sa se inverseze sirul si sa se calculeze lungimea sa, se va
+	parcurge crescator, de la indecsi mici la mari, si conditia de oprire
+	va fi intalnirea caracterului '\0'.
+	- Salvarea doar a strictului necesar( se salveaza registre de care nu e
+	nevoie ).
+Return: -1 daca sirul este NAN( not a number ), valoarea numerica a sirului
+	altfel
+Prototip: int mystery7( char *string );
+______________________________________________________________________________
+
+	mystery8() - functie ce verifica daca un sir include alt sir
+@haystack: adresa sirului de caractere in care se cauta
+@needle: adresa sirului de caractere cautat
+@sizeof_needle: lungimea sirului 'needle'
+
+Functia are trei parametrii. Primii doi sunt sirul in care se cauta respectiv
+sirul cautat. Al treilea este lungimea sirului cautat. Functia foloseste doua
+variabile locale pentru a retine indexul curent in fiecare dintre siruri. 
+Se compara caracterele de la indecsii curenti pentru fiecare sir. Daca sunt
+diferiti, indexul pentru sirul 'needle' este resetat. Daca indexul pentru
+sirul 'needle' ajunge la 'sizeof_needle' atunci sirul a fost gasit si functia
+intoarce 1. Altfel intoarce 0.
+
+BUG-URI:
+POSIBILE IMBUNATATIRI:
+Return: 1 daca a gasit 'needle' in 'haystack', 0 altfel.
+Prototip: int mystery8( char *haystack, char *needle, int sizeof_needle );
+______________________________________________________________________________
+
+	mystery9() - functie ce afiseaza toate liniile dintr-un text in care
+		     se gasesc un anumit sir de caractere
+@text: adresa sirului de caractere ce reprezinta textul
+@from: indexul de la care incepe cautarea
+@to: indexul pana la care se cauta
+@needle: adresa sirului de caractere cautat
+
+Functia are 4 parametrii. Primul si ultimul reprezinta siruri de caractere.
+Al doilea si al treilea reprezinta indecsi intre care se cauta, in text, sirul
+cautat. 
+
+BUG-URI:
+POSIBILE IMBUNATATIRI:
+Return: Nimic
+Prototip: void mystery9( char *text, int from, int to, char *needle );
+______________________________________________________________________________
+
+	Programul ca un tot unitar: cauta intr-un text, trimis de la tastatura
+sau existent intr-un fisier, un cuvant aflat intr-un interval de caractere.
+
+Optiuni:
+	- Optiunea "-f" urmata de cuvantul cautat; absenta duce la lipsa de 
+	output din partea programului.
+	- Optiunea "-i" urmata de numele fisierului de intrare; absenta duce la
+	citirea de la tastatura a textului.
+	- Optiunea "-s" urmata de un numar intreg ce reprezinta indexul
+	caracterului din text de la care incepe cautarea; absenta duce la
+	folosirea numarului 0 in schimb.
+	- Optiunea "-e" urmata de un numar intreg ce reprezinta indexul
+	caracterului din text pana la care se face cautarea; absenta duce la
+	folosirea numarului de caractere citite in schimb.
+
+BUG-URI:
+	- Optiunea "-e" are urmatorul bug: nu se va aplica cautarea sirului
+	in ultima linie din intervalul de caractere dat decat daca intervalul
+	se termina cu caracterul '\n'; Acest lucru se datoreaza faptului ca se
+	aplica cautarea doar cand se intalneste caracterul '\n'.
+______________________________________________________________________________
+
+	OPTIMIZAREA DE VITEZA:
+	- S-au aplicat imbunatatirile descrise anterior( nu toate; doar cele
+	care afectau cel mai mult programul, adica cele care au legatura cu
+	functia mystery9 );
+	- S-au inlaturat operatii redundate din multe locuri in program. Si 
+	cateva apeluri redundante de functii.

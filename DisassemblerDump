@@ -1,0 +1,829 @@
+
+tema3:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+08048100 <syscall_wrapper>:
+ 8048100:	55                   	push   ebp
+ 8048101:	89 e5                	mov    ebp,esp
+ 8048103:	56                   	push   esi
+ 8048104:	53                   	push   ebx
+ 8048105:	83 ec 10             	sub    esp,0x10
+ 8048108:	c7 45 f4 00 00 00 00 	mov    DWORD PTR [ebp-0xc],0x0
+ 804810f:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+ 8048112:	8b 5d 0c             	mov    ebx,DWORD PTR [ebp+0xc]
+ 8048115:	8b 4d 10             	mov    ecx,DWORD PTR [ebp+0x10]
+ 8048118:	8b 55 14             	mov    edx,DWORD PTR [ebp+0x14]
+ 804811b:	cd 80                	int    0x80
+ 804811d:	89 c6                	mov    esi,eax
+ 804811f:	89 75 f4             	mov    DWORD PTR [ebp-0xc],esi
+ 8048122:	8b 45 f4             	mov    eax,DWORD PTR [ebp-0xc]
+ 8048125:	83 c4 10             	add    esp,0x10
+ 8048128:	5b                   	pop    ebx
+ 8048129:	5e                   	pop    esi
+ 804812a:	5d                   	pop    ebp
+ 804812b:	c3                   	ret    
+
+0804812c <do_exit>:
+ 804812c:	55                   	push   ebp
+ 804812d:	89 e5                	mov    ebp,esp
+ 804812f:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+ 8048132:	6a 00                	push   0x0
+ 8048134:	6a 00                	push   0x0
+ 8048136:	50                   	push   eax
+ 8048137:	6a 01                	push   0x1
+ 8048139:	e8 c2 ff ff ff       	call   8048100 <syscall_wrapper>
+ 804813e:	83 c4 10             	add    esp,0x10
+ 8048141:	90                   	nop
+ 8048142:	c9                   	leave  
+ 8048143:	c3                   	ret    
+
+08048144 <do_write>:
+ 8048144:	55                   	push   ebp
+ 8048145:	89 e5                	mov    ebp,esp
+ 8048147:	8b 55 10             	mov    edx,DWORD PTR [ebp+0x10]
+ 804814a:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+ 804814d:	52                   	push   edx
+ 804814e:	ff 75 0c             	push   DWORD PTR [ebp+0xc]
+ 8048151:	50                   	push   eax
+ 8048152:	6a 04                	push   0x4
+ 8048154:	e8 a7 ff ff ff       	call   8048100 <syscall_wrapper>
+ 8048159:	83 c4 10             	add    esp,0x10
+ 804815c:	c9                   	leave  
+ 804815d:	c3                   	ret    
+
+0804815e <do_read>:
+ 804815e:	55                   	push   ebp
+ 804815f:	89 e5                	mov    ebp,esp
+ 8048161:	8b 55 10             	mov    edx,DWORD PTR [ebp+0x10]
+ 8048164:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+ 8048167:	52                   	push   edx
+ 8048168:	ff 75 0c             	push   DWORD PTR [ebp+0xc]
+ 804816b:	50                   	push   eax
+ 804816c:	6a 03                	push   0x3
+ 804816e:	e8 8d ff ff ff       	call   8048100 <syscall_wrapper>
+ 8048173:	83 c4 10             	add    esp,0x10
+ 8048176:	c9                   	leave  
+ 8048177:	c3                   	ret    
+
+08048178 <do_open>:
+ 8048178:	55                   	push   ebp
+ 8048179:	89 e5                	mov    ebp,esp
+ 804817b:	8b 55 10             	mov    edx,DWORD PTR [ebp+0x10]
+ 804817e:	8b 45 0c             	mov    eax,DWORD PTR [ebp+0xc]
+ 8048181:	52                   	push   edx
+ 8048182:	50                   	push   eax
+ 8048183:	ff 75 08             	push   DWORD PTR [ebp+0x8]
+ 8048186:	6a 05                	push   0x5
+ 8048188:	e8 73 ff ff ff       	call   8048100 <syscall_wrapper>
+ 804818d:	83 c4 10             	add    esp,0x10
+ 8048190:	c9                   	leave  
+ 8048191:	c3                   	ret    
+
+08048192 <do_close>:
+ 8048192:	55                   	push   ebp
+ 8048193:	89 e5                	mov    ebp,esp
+ 8048195:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+ 8048198:	6a 00                	push   0x0
+ 804819a:	6a 00                	push   0x0
+ 804819c:	50                   	push   eax
+ 804819d:	6a 06                	push   0x6
+ 804819f:	e8 5c ff ff ff       	call   8048100 <syscall_wrapper>
+ 80481a4:	83 c4 10             	add    esp,0x10
+ 80481a7:	90                   	nop
+ 80481a8:	c9                   	leave  
+ 80481a9:	c3                   	ret    
+
+080481aa <read_from_file>:
+ 80481aa:	55                   	push   ebp
+ 80481ab:	89 e5                	mov    ebp,esp
+ 80481ad:	83 ec 10             	sub    esp,0x10
+ 80481b0:	c7 45 fc 00 00 00 00 	mov    DWORD PTR [ebp-0x4],0x0
+ 80481b7:	6a 00                	push   0x0
+ 80481b9:	6a 00                	push   0x0
+ 80481bb:	ff 75 08             	push   DWORD PTR [ebp+0x8]
+ 80481be:	e8 b5 ff ff ff       	call   8048178 <do_open>
+ 80481c3:	83 c4 0c             	add    esp,0xc
+ 80481c6:	89 45 f8             	mov    DWORD PTR [ebp-0x8],eax
+ 80481c9:	83 7d f8 00          	cmp    DWORD PTR [ebp-0x8],0x0
+ 80481cd:	79 0a                	jns    80481d9 <read_from_file+0x2f>
+ 80481cf:	6a f9                	push   0xfffffff9
+ 80481d1:	e8 56 ff ff ff       	call   804812c <do_exit>
+ 80481d6:	83 c4 04             	add    esp,0x4
+ 80481d9:	8b 45 10             	mov    eax,DWORD PTR [ebp+0x10]
+ 80481dc:	50                   	push   eax
+ 80481dd:	ff 75 0c             	push   DWORD PTR [ebp+0xc]
+ 80481e0:	ff 75 f8             	push   DWORD PTR [ebp-0x8]
+ 80481e3:	e8 76 ff ff ff       	call   804815e <do_read>
+ 80481e8:	83 c4 0c             	add    esp,0xc
+ 80481eb:	89 45 fc             	mov    DWORD PTR [ebp-0x4],eax
+ 80481ee:	ff 75 f8             	push   DWORD PTR [ebp-0x8]
+ 80481f1:	e8 9c ff ff ff       	call   8048192 <do_close>
+ 80481f6:	83 c4 04             	add    esp,0x4
+ 80481f9:	8b 45 fc             	mov    eax,DWORD PTR [ebp-0x4]
+ 80481fc:	c9                   	leave  
+ 80481fd:	c3                   	ret    
+
+080481fe <print_string>:
+ 80481fe:	55                   	push   ebp
+ 80481ff:	89 e5                	mov    ebp,esp
+ 8048201:	83 ec 18             	sub    esp,0x18
+ 8048204:	83 ec 0c             	sub    esp,0xc
+ 8048207:	ff 75 08             	push   DWORD PTR [ebp+0x8]
+ 804820a:	e8 91 04 00 00       	call   80486a0 <mystery1>
+ 804820f:	83 c4 10             	add    esp,0x10
+ 8048212:	89 45 f4             	mov    DWORD PTR [ebp-0xc],eax
+ 8048215:	8b 45 f4             	mov    eax,DWORD PTR [ebp-0xc]
+ 8048218:	83 ec 04             	sub    esp,0x4
+ 804821b:	50                   	push   eax
+ 804821c:	ff 75 08             	push   DWORD PTR [ebp+0x8]
+ 804821f:	6a 01                	push   0x1
+ 8048221:	e8 1e ff ff ff       	call   8048144 <do_write>
+ 8048226:	83 c4 10             	add    esp,0x10
+ 8048229:	90                   	nop
+ 804822a:	c9                   	leave  
+ 804822b:	c3                   	ret    
+
+0804822c <print_line>:
+ 804822c:	55                   	push   ebp
+ 804822d:	89 e5                	mov    ebp,esp
+ 804822f:	83 ec 18             	sub    esp,0x18
+ 8048232:	c6 45 f7 0a          	mov    BYTE PTR [ebp-0x9],0xa
+ 8048236:	0f be 45 f7          	movsx  eax,BYTE PTR [ebp-0x9]
+ 804823a:	83 ec 08             	sub    esp,0x8
+ 804823d:	50                   	push   eax
+ 804823e:	ff 75 08             	push   DWORD PTR [ebp+0x8]
+ 8048241:	e8 72 04 00 00       	call   80486b8 <mystery2>
+ 8048246:	83 c4 10             	add    esp,0x10
+ 8048249:	89 45 f0             	mov    DWORD PTR [ebp-0x10],eax
+ 804824c:	83 7d f0 fe          	cmp    DWORD PTR [ebp-0x10],0xfffffffe
+ 8048250:	75 10                	jne    8048262 <print_line+0x36>
+ 8048252:	83 ec 0c             	sub    esp,0xc
+ 8048255:	ff 75 08             	push   DWORD PTR [ebp+0x8]
+ 8048258:	e8 a1 ff ff ff       	call   80481fe <print_string>
+ 804825d:	83 c4 10             	add    esp,0x10
+ 8048260:	eb 17                	jmp    8048279 <print_line+0x4d>
+ 8048262:	8b 45 f0             	mov    eax,DWORD PTR [ebp-0x10]
+ 8048265:	83 c0 01             	add    eax,0x1
+ 8048268:	83 ec 04             	sub    esp,0x4
+ 804826b:	50                   	push   eax
+ 804826c:	ff 75 08             	push   DWORD PTR [ebp+0x8]
+ 804826f:	6a 01                	push   0x1
+ 8048271:	e8 ce fe ff ff       	call   8048144 <do_write>
+ 8048276:	83 c4 10             	add    esp,0x10
+ 8048279:	90                   	nop
+ 804827a:	c9                   	leave  
+ 804827b:	c3                   	ret    
+
+0804827c <parse_opt>:
+ 804827c:	55                   	push   ebp
+ 804827d:	89 e5                	mov    ebp,esp
+ 804827f:	83 ec 08             	sub    esp,0x8
+ 8048282:	83 ec 0c             	sub    esp,0xc
+ 8048285:	ff 75 08             	push   DWORD PTR [ebp+0x8]
+ 8048288:	e8 13 04 00 00       	call   80486a0 <mystery1>
+ 804828d:	83 c4 10             	add    esp,0x10
+ 8048290:	83 f8 02             	cmp    eax,0x2
+ 8048293:	74 0d                	je     80482a2 <parse_opt+0x26>
+ 8048295:	83 ec 0c             	sub    esp,0xc
+ 8048298:	6a fe                	push   0xfffffffe
+ 804829a:	e8 8d fe ff ff       	call   804812c <do_exit>
+ 804829f:	83 c4 10             	add    esp,0x10
+ 80482a2:	83 ec 04             	sub    esp,0x4
+ 80482a5:	6a 02                	push   0x2
+ 80482a7:	68 d8 88 04 08       	push   0x80488d8
+ 80482ac:	ff 75 08             	push   DWORD PTR [ebp+0x8]
+ 80482af:	e8 33 04 00 00       	call   80486e7 <mystery3>
+ 80482b4:	83 c4 10             	add    esp,0x10
+ 80482b7:	85 c0                	test   eax,eax
+ 80482b9:	75 07                	jne    80482c2 <parse_opt+0x46>
+ 80482bb:	b8 08 00 00 00       	mov    eax,0x8
+ 80482c0:	eb 65                	jmp    8048327 <parse_opt+0xab>
+ 80482c2:	83 ec 04             	sub    esp,0x4
+ 80482c5:	6a 02                	push   0x2
+ 80482c7:	68 db 88 04 08       	push   0x80488db
+ 80482cc:	ff 75 08             	push   DWORD PTR [ebp+0x8]
+ 80482cf:	e8 13 04 00 00       	call   80486e7 <mystery3>
+ 80482d4:	83 c4 10             	add    esp,0x10
+ 80482d7:	85 c0                	test   eax,eax
+ 80482d9:	75 07                	jne    80482e2 <parse_opt+0x66>
+ 80482db:	b8 02 00 00 00       	mov    eax,0x2
+ 80482e0:	eb 45                	jmp    8048327 <parse_opt+0xab>
+ 80482e2:	83 ec 04             	sub    esp,0x4
+ 80482e5:	6a 02                	push   0x2
+ 80482e7:	68 de 88 04 08       	push   0x80488de
+ 80482ec:	ff 75 08             	push   DWORD PTR [ebp+0x8]
+ 80482ef:	e8 f3 03 00 00       	call   80486e7 <mystery3>
+ 80482f4:	83 c4 10             	add    esp,0x10
+ 80482f7:	85 c0                	test   eax,eax
+ 80482f9:	75 07                	jne    8048302 <parse_opt+0x86>
+ 80482fb:	b8 04 00 00 00       	mov    eax,0x4
+ 8048300:	eb 25                	jmp    8048327 <parse_opt+0xab>
+ 8048302:	83 ec 04             	sub    esp,0x4
+ 8048305:	6a 02                	push   0x2
+ 8048307:	68 e1 88 04 08       	push   0x80488e1
+ 804830c:	ff 75 08             	push   DWORD PTR [ebp+0x8]
+ 804830f:	e8 d3 03 00 00       	call   80486e7 <mystery3>
+ 8048314:	83 c4 10             	add    esp,0x10
+ 8048317:	85 c0                	test   eax,eax
+ 8048319:	75 07                	jne    8048322 <parse_opt+0xa6>
+ 804831b:	b8 01 00 00 00       	mov    eax,0x1
+ 8048320:	eb 05                	jmp    8048327 <parse_opt+0xab>
+ 8048322:	b8 fe ff ff ff       	mov    eax,0xfffffffe
+ 8048327:	c9                   	leave  
+ 8048328:	c3                   	ret    
+
+08048329 <parse_args>:
+ 8048329:	55                   	push   ebp
+ 804832a:	89 e5                	mov    ebp,esp
+ 804832c:	83 ec 18             	sub    esp,0x18
+ 804832f:	c7 45 f4 00 00 00 00 	mov    DWORD PTR [ebp-0xc],0x0
+ 8048336:	c7 45 ec 00 00 00 00 	mov    DWORD PTR [ebp-0x14],0x0
+ 804833d:	c7 45 f0 00 00 00 00 	mov    DWORD PTR [ebp-0x10],0x0
+ 8048344:	c7 45 e8 00 00 00 00 	mov    DWORD PTR [ebp-0x18],0x0
+ 804834b:	c7 45 f4 01 00 00 00 	mov    DWORD PTR [ebp-0xc],0x1
+ 8048352:	e9 d6 01 00 00       	jmp    804852d <parse_args+0x204>
+ 8048357:	a1 04 a0 04 08       	mov    eax,ds:0x804a004
+ 804835c:	8b 55 f4             	mov    edx,DWORD PTR [ebp-0xc]
+ 804835f:	c1 e2 02             	shl    edx,0x2
+ 8048362:	01 d0                	add    eax,edx
+ 8048364:	8b 00                	mov    eax,DWORD PTR [eax]
+ 8048366:	0f b6 00             	movzx  eax,BYTE PTR [eax]
+ 8048369:	3c 2d                	cmp    al,0x2d
+ 804836b:	0f 85 b8 01 00 00    	jne    8048529 <parse_args+0x200>
+ 8048371:	a1 04 a0 04 08       	mov    eax,ds:0x804a004
+ 8048376:	8b 55 f4             	mov    edx,DWORD PTR [ebp-0xc]
+ 8048379:	c1 e2 02             	shl    edx,0x2
+ 804837c:	01 d0                	add    eax,edx
+ 804837e:	8b 00                	mov    eax,DWORD PTR [eax]
+ 8048380:	83 ec 0c             	sub    esp,0xc
+ 8048383:	50                   	push   eax
+ 8048384:	e8 f3 fe ff ff       	call   804827c <parse_opt>
+ 8048389:	83 c4 10             	add    esp,0x10
+ 804838c:	89 45 ec             	mov    DWORD PTR [ebp-0x14],eax
+ 804838f:	83 7d ec fe          	cmp    DWORD PTR [ebp-0x14],0xfffffffe
+ 8048393:	75 0d                	jne    80483a2 <parse_args+0x79>
+ 8048395:	83 ec 0c             	sub    esp,0xc
+ 8048398:	6a fe                	push   0xfffffffe
+ 804839a:	e8 8d fd ff ff       	call   804812c <do_exit>
+ 804839f:	83 c4 10             	add    esp,0x10
+ 80483a2:	8b 45 ec             	mov    eax,DWORD PTR [ebp-0x14]
+ 80483a5:	23 45 f0             	and    eax,DWORD PTR [ebp-0x10]
+ 80483a8:	85 c0                	test   eax,eax
+ 80483aa:	74 0d                	je     80483b9 <parse_args+0x90>
+ 80483ac:	83 ec 0c             	sub    esp,0xc
+ 80483af:	6a fd                	push   0xfffffffd
+ 80483b1:	e8 76 fd ff ff       	call   804812c <do_exit>
+ 80483b6:	83 c4 10             	add    esp,0x10
+ 80483b9:	8b 45 ec             	mov    eax,DWORD PTR [ebp-0x14]
+ 80483bc:	09 45 f0             	or     DWORD PTR [ebp-0x10],eax
+ 80483bf:	8b 45 ec             	mov    eax,DWORD PTR [ebp-0x14]
+ 80483c2:	83 f8 02             	cmp    eax,0x2
+ 80483c5:	0f 84 df 00 00 00    	je     80484aa <parse_args+0x181>
+ 80483cb:	83 f8 02             	cmp    eax,0x2
+ 80483ce:	7f 0a                	jg     80483da <parse_args+0xb1>
+ 80483d0:	83 f8 01             	cmp    eax,0x1
+ 80483d3:	74 18                	je     80483ed <parse_args+0xc4>
+ 80483d5:	e9 4b 01 00 00       	jmp    8048525 <parse_args+0x1fc>
+ 80483da:	83 f8 04             	cmp    eax,0x4
+ 80483dd:	0f 84 05 01 00 00    	je     80484e8 <parse_args+0x1bf>
+ 80483e3:	83 f8 08             	cmp    eax,0x8
+ 80483e6:	74 65                	je     804844d <parse_args+0x124>
+ 80483e8:	e9 38 01 00 00       	jmp    8048525 <parse_args+0x1fc>
+ 80483ed:	a1 04 a0 04 08       	mov    eax,ds:0x804a004
+ 80483f2:	8b 55 f4             	mov    edx,DWORD PTR [ebp-0xc]
+ 80483f5:	83 c2 01             	add    edx,0x1
+ 80483f8:	c1 e2 02             	shl    edx,0x2
+ 80483fb:	01 d0                	add    eax,edx
+ 80483fd:	8b 00                	mov    eax,DWORD PTR [eax]
+ 80483ff:	83 ec 0c             	sub    esp,0xc
+ 8048402:	50                   	push   eax
+ 8048403:	e8 98 02 00 00       	call   80486a0 <mystery1>
+ 8048408:	83 c4 10             	add    esp,0x10
+ 804840b:	89 45 e8             	mov    DWORD PTR [ebp-0x18],eax
+ 804840e:	83 7d e8 1f          	cmp    DWORD PTR [ebp-0x18],0x1f
+ 8048412:	7e 0d                	jle    8048421 <parse_args+0xf8>
+ 8048414:	83 ec 0c             	sub    esp,0xc
+ 8048417:	6a fc                	push   0xfffffffc
+ 8048419:	e8 0e fd ff ff       	call   804812c <do_exit>
+ 804841e:	83 c4 10             	add    esp,0x10
+ 8048421:	8b 55 e8             	mov    edx,DWORD PTR [ebp-0x18]
+ 8048424:	a1 04 a0 04 08       	mov    eax,ds:0x804a004
+ 8048429:	8b 4d f4             	mov    ecx,DWORD PTR [ebp-0xc]
+ 804842c:	83 c1 01             	add    ecx,0x1
+ 804842f:	c1 e1 02             	shl    ecx,0x2
+ 8048432:	01 c8                	add    eax,ecx
+ 8048434:	8b 00                	mov    eax,DWORD PTR [eax]
+ 8048436:	83 ec 04             	sub    esp,0x4
+ 8048439:	52                   	push   edx
+ 804843a:	50                   	push   eax
+ 804843b:	68 20 a0 04 08       	push   0x804a020
+ 8048440:	e8 c5 02 00 00       	call   804870a <mystery4>
+ 8048445:	83 c4 10             	add    esp,0x10
+ 8048448:	e9 d8 00 00 00       	jmp    8048525 <parse_args+0x1fc>
+ 804844d:	a1 04 a0 04 08       	mov    eax,ds:0x804a004
+ 8048452:	8b 55 f4             	mov    edx,DWORD PTR [ebp-0xc]
+ 8048455:	83 c2 01             	add    edx,0x1
+ 8048458:	c1 e2 02             	shl    edx,0x2
+ 804845b:	01 d0                	add    eax,edx
+ 804845d:	8b 00                	mov    eax,DWORD PTR [eax]
+ 804845f:	83 ec 0c             	sub    esp,0xc
+ 8048462:	50                   	push   eax
+ 8048463:	e8 38 02 00 00       	call   80486a0 <mystery1>
+ 8048468:	83 c4 10             	add    esp,0x10
+ 804846b:	89 45 e8             	mov    DWORD PTR [ebp-0x18],eax
+ 804846e:	83 7d e8 1f          	cmp    DWORD PTR [ebp-0x18],0x1f
+ 8048472:	7e 0d                	jle    8048481 <parse_args+0x158>
+ 8048474:	83 ec 0c             	sub    esp,0xc
+ 8048477:	6a fc                	push   0xfffffffc
+ 8048479:	e8 ae fc ff ff       	call   804812c <do_exit>
+ 804847e:	83 c4 10             	add    esp,0x10
+ 8048481:	8b 55 e8             	mov    edx,DWORD PTR [ebp-0x18]
+ 8048484:	a1 04 a0 04 08       	mov    eax,ds:0x804a004
+ 8048489:	8b 4d f4             	mov    ecx,DWORD PTR [ebp-0xc]
+ 804848c:	83 c1 01             	add    ecx,0x1
+ 804848f:	c1 e1 02             	shl    ecx,0x2
+ 8048492:	01 c8                	add    eax,ecx
+ 8048494:	8b 00                	mov    eax,DWORD PTR [eax]
+ 8048496:	83 ec 04             	sub    esp,0x4
+ 8048499:	52                   	push   edx
+ 804849a:	50                   	push   eax
+ 804849b:	68 40 a0 04 08       	push   0x804a040
+ 80484a0:	e8 65 02 00 00       	call   804870a <mystery4>
+ 80484a5:	83 c4 10             	add    esp,0x10
+ 80484a8:	eb 7b                	jmp    8048525 <parse_args+0x1fc>
+ 80484aa:	a1 04 a0 04 08       	mov    eax,ds:0x804a004
+ 80484af:	8b 55 f4             	mov    edx,DWORD PTR [ebp-0xc]
+ 80484b2:	83 c2 01             	add    edx,0x1
+ 80484b5:	c1 e2 02             	shl    edx,0x2
+ 80484b8:	01 d0                	add    eax,edx
+ 80484ba:	8b 00                	mov    eax,DWORD PTR [eax]
+ 80484bc:	83 ec 0c             	sub    esp,0xc
+ 80484bf:	50                   	push   eax
+ 80484c0:	e8 ad 02 00 00       	call   8048772 <mystery7>
+ 80484c5:	83 c4 10             	add    esp,0x10
+ 80484c8:	89 45 e8             	mov    DWORD PTR [ebp-0x18],eax
+ 80484cb:	83 7d e8 ff          	cmp    DWORD PTR [ebp-0x18],0xffffffff
+ 80484cf:	75 0d                	jne    80484de <parse_args+0x1b5>
+ 80484d1:	83 ec 0c             	sub    esp,0xc
+ 80484d4:	6a fb                	push   0xfffffffb
+ 80484d6:	e8 51 fc ff ff       	call   804812c <do_exit>
+ 80484db:	83 c4 10             	add    esp,0x10
+ 80484de:	8b 45 e8             	mov    eax,DWORD PTR [ebp-0x18]
+ 80484e1:	a3 64 a0 db 0e       	mov    ds:0xedba064,eax
+ 80484e6:	eb 3d                	jmp    8048525 <parse_args+0x1fc>
+ 80484e8:	a1 04 a0 04 08       	mov    eax,ds:0x804a004
+ 80484ed:	8b 55 f4             	mov    edx,DWORD PTR [ebp-0xc]
+ 80484f0:	83 c2 01             	add    edx,0x1
+ 80484f3:	c1 e2 02             	shl    edx,0x2
+ 80484f6:	01 d0                	add    eax,edx
+ 80484f8:	8b 00                	mov    eax,DWORD PTR [eax]
+ 80484fa:	83 ec 0c             	sub    esp,0xc
+ 80484fd:	50                   	push   eax
+ 80484fe:	e8 6f 02 00 00       	call   8048772 <mystery7>
+ 8048503:	83 c4 10             	add    esp,0x10
+ 8048506:	89 45 e8             	mov    DWORD PTR [ebp-0x18],eax
+ 8048509:	83 7d e8 ff          	cmp    DWORD PTR [ebp-0x18],0xffffffff
+ 804850d:	75 0d                	jne    804851c <parse_args+0x1f3>
+ 804850f:	83 ec 0c             	sub    esp,0xc
+ 8048512:	6a fb                	push   0xfffffffb
+ 8048514:	e8 13 fc ff ff       	call   804812c <do_exit>
+ 8048519:	83 c4 10             	add    esp,0x10
+ 804851c:	8b 45 e8             	mov    eax,DWORD PTR [ebp-0x18]
+ 804851f:	a3 68 a0 db 0e       	mov    ds:0xedba068,eax
+ 8048524:	90                   	nop
+ 8048525:	83 45 f4 01          	add    DWORD PTR [ebp-0xc],0x1
+ 8048529:	83 45 f4 01          	add    DWORD PTR [ebp-0xc],0x1
+ 804852d:	a1 00 a0 04 08       	mov    eax,ds:0x804a000
+ 8048532:	39 45 f4             	cmp    DWORD PTR [ebp-0xc],eax
+ 8048535:	0f 82 1c fe ff ff    	jb     8048357 <parse_args+0x2e>
+ 804853b:	8b 45 f0             	mov    eax,DWORD PTR [ebp-0x10]
+ 804853e:	a3 60 a0 db 0e       	mov    ds:0xedba060,eax
+ 8048543:	90                   	nop
+ 8048544:	c9                   	leave  
+ 8048545:	c3                   	ret    
+
+08048546 <do_simple_echo>:
+ 8048546:	55                   	push   ebp
+ 8048547:	89 e5                	mov    ebp,esp
+ 8048549:	83 ec 30             	sub    esp,0x30
+ 804854c:	b9 00 00 00 00       	mov    ecx,0x0
+ 8048551:	b8 20 00 00 00       	mov    eax,0x20
+ 8048556:	83 e0 fc             	and    eax,0xfffffffc
+ 8048559:	89 c2                	mov    edx,eax
+ 804855b:	b8 00 00 00 00       	mov    eax,0x0
+ 8048560:	89 4c 05 dc          	mov    DWORD PTR [ebp+eax*1-0x24],ecx
+ 8048564:	83 c0 04             	add    eax,0x4
+ 8048567:	39 d0                	cmp    eax,edx
+ 8048569:	72 f5                	jb     8048560 <do_simple_echo+0x1a>
+ 804856b:	c7 45 fc 00 00 00 00 	mov    DWORD PTR [ebp-0x4],0x0
+ 8048572:	6a 20                	push   0x20
+ 8048574:	8d 45 dc             	lea    eax,[ebp-0x24]
+ 8048577:	50                   	push   eax
+ 8048578:	6a 00                	push   0x0
+ 804857a:	e8 df fb ff ff       	call   804815e <do_read>
+ 804857f:	83 c4 0c             	add    esp,0xc
+ 8048582:	89 45 fc             	mov    DWORD PTR [ebp-0x4],eax
+ 8048585:	6a 20                	push   0x20
+ 8048587:	8d 45 dc             	lea    eax,[ebp-0x24]
+ 804858a:	50                   	push   eax
+ 804858b:	6a 01                	push   0x1
+ 804858d:	e8 b2 fb ff ff       	call   8048144 <do_write>
+ 8048592:	83 c4 0c             	add    esp,0xc
+ 8048595:	90                   	nop
+ 8048596:	c9                   	leave  
+ 8048597:	c3                   	ret    
+
+08048598 <do_run>:
+ 8048598:	55                   	push   ebp
+ 8048599:	89 e5                	mov    ebp,esp
+ 804859b:	83 ec 18             	sub    esp,0x18
+ 804859e:	c7 45 f4 00 00 00 00 	mov    DWORD PTR [ebp-0xc],0x0
+ 80485a5:	a1 60 a0 db 0e       	mov    eax,ds:0xedba060
+ 80485aa:	83 e0 01             	and    eax,0x1
+ 80485ad:	85 c0                	test   eax,eax
+ 80485af:	74 27                	je     80485d8 <do_run+0x40>
+ 80485b1:	68 00 00 d7 06       	push   0x6d70000
+ 80485b6:	68 60 a0 04 08       	push   0x804a060
+ 80485bb:	68 20 a0 04 08       	push   0x804a020
+ 80485c0:	e8 e5 fb ff ff       	call   80481aa <read_from_file>
+ 80485c5:	83 c4 0c             	add    esp,0xc
+ 80485c8:	89 45 f4             	mov    DWORD PTR [ebp-0xc],eax
+ 80485cb:	8b 45 f4             	mov    eax,DWORD PTR [ebp-0xc]
+ 80485ce:	05 60 a0 04 08       	add    eax,0x804a060
+ 80485d3:	c6 00 00             	mov    BYTE PTR [eax],0x0
+ 80485d6:	eb 22                	jmp    80485fa <do_run+0x62>
+ 80485d8:	68 00 00 d7 06       	push   0x6d70000
+ 80485dd:	68 60 a0 04 08       	push   0x804a060
+ 80485e2:	6a 00                	push   0x0
+ 80485e4:	e8 75 fb ff ff       	call   804815e <do_read>
+ 80485e9:	83 c4 0c             	add    esp,0xc
+ 80485ec:	89 45 f4             	mov    DWORD PTR [ebp-0xc],eax
+ 80485ef:	8b 45 f4             	mov    eax,DWORD PTR [ebp-0xc]
+ 80485f2:	05 60 a0 04 08       	add    eax,0x804a060
+ 80485f7:	c6 00 00             	mov    BYTE PTR [eax],0x0
+ 80485fa:	a1 60 a0 db 0e       	mov    eax,ds:0xedba060
+ 80485ff:	83 e0 02             	and    eax,0x2
+ 8048602:	85 c0                	test   eax,eax
+ 8048604:	75 0a                	jne    8048610 <do_run+0x78>
+ 8048606:	c7 05 64 a0 db 0e 00 	mov    DWORD PTR ds:0xedba064,0x0
+ 804860d:	00 00 00 
+ 8048610:	a1 60 a0 db 0e       	mov    eax,ds:0xedba060
+ 8048615:	83 e0 04             	and    eax,0x4
+ 8048618:	85 c0                	test   eax,eax
+ 804861a:	75 08                	jne    8048624 <do_run+0x8c>
+ 804861c:	8b 45 f4             	mov    eax,DWORD PTR [ebp-0xc]
+ 804861f:	a3 68 a0 db 0e       	mov    ds:0xedba068,eax
+ 8048624:	a1 60 a0 db 0e       	mov    eax,ds:0xedba060
+ 8048629:	83 e0 08             	and    eax,0x8
+ 804862c:	85 c0                	test   eax,eax
+ 804862e:	74 1f                	je     804864f <do_run+0xb7>
+ 8048630:	8b 15 68 a0 db 0e    	mov    edx,DWORD PTR ds:0xedba068
+ 8048636:	a1 64 a0 db 0e       	mov    eax,ds:0xedba064
+ 804863b:	68 40 a0 04 08       	push   0x804a040
+ 8048640:	52                   	push   edx
+ 8048641:	50                   	push   eax
+ 8048642:	68 60 a0 04 08       	push   0x804a060
+ 8048647:	e8 0a 02 00 00       	call   8048856 <mystery9>
+ 804864c:	83 c4 10             	add    esp,0x10
+ 804864f:	90                   	nop
+ 8048650:	c9                   	leave  
+ 8048651:	c3                   	ret    
+
+08048652 <_start>:
+ 8048652:	55                   	push   ebp
+ 8048653:	89 e5                	mov    ebp,esp
+ 8048655:	83 ec 08             	sub    esp,0x8
+ 8048658:	8b 44 24 0c          	mov    eax,DWORD PTR [esp+0xc]
+ 804865c:	a3 00 a0 04 08       	mov    ds:0x804a000,eax
+ 8048661:	8d 44 24 10          	lea    eax,[esp+0x10]
+ 8048665:	a3 04 a0 04 08       	mov    ds:0x804a004,eax
+ 804866a:	a1 00 a0 04 08       	mov    eax,ds:0x804a000
+ 804866f:	83 f8 01             	cmp    eax,0x1
+ 8048672:	75 07                	jne    804867b <_start+0x29>
+ 8048674:	e8 cd fe ff ff       	call   8048546 <do_simple_echo>
+ 8048679:	eb 0b                	jmp    8048686 <_start+0x34>
+ 804867b:	e8 a9 fc ff ff       	call   8048329 <parse_args>
+ 8048680:	e8 13 ff ff ff       	call   8048598 <do_run>
+ 8048685:	90                   	nop
+ 8048686:	83 ec 0c             	sub    esp,0xc
+ 8048689:	6a 00                	push   0x0
+ 804868b:	e8 9c fa ff ff       	call   804812c <do_exit>
+ 8048690:	83 c4 10             	add    esp,0x10
+ 8048693:	90                   	nop
+ 8048694:	c9                   	leave  
+ 8048695:	c3                   	ret    
+ 8048696:	66 90                	xchg   ax,ax
+ 8048698:	66 90                	xchg   ax,ax
+ 804869a:	66 90                	xchg   ax,ax
+ 804869c:	66 90                	xchg   ax,ax
+ 804869e:	66 90                	xchg   ax,ax
+
+080486a0 <mystery1>:
+ 80486a0:	55                   	push   ebp
+ 80486a1:	89 e5                	mov    ebp,esp
+ 80486a3:	53                   	push   ebx
+ 80486a4:	8b 7d 08             	mov    edi,DWORD PTR [ebp+0x8]
+ 80486a7:	31 c0                	xor    eax,eax
+ 80486a9:	31 db                	xor    ebx,ebx
+
+080486ab <mystery1_l1>:
+ 80486ab:	8a 1f                	mov    bl,BYTE PTR [edi]
+ 80486ad:	85 db                	test   ebx,ebx
+ 80486af:	74 04                	je     80486b5 <mystery1_l2>
+ 80486b1:	40                   	inc    eax
+ 80486b2:	47                   	inc    edi
+ 80486b3:	eb f6                	jmp    80486ab <mystery1_l1>
+
+080486b5 <mystery1_l2>:
+ 80486b5:	5b                   	pop    ebx
+ 80486b6:	c9                   	leave  
+ 80486b7:	c3                   	ret    
+
+080486b8 <mystery2>:
+ 80486b8:	55                   	push   ebp
+ 80486b9:	89 e5                	mov    ebp,esp
+ 80486bb:	8b 55 08             	mov    edx,DWORD PTR [ebp+0x8]
+ 80486be:	52                   	push   edx
+ 80486bf:	e8 dc ff ff ff       	call   80486a0 <mystery1>
+ 80486c4:	83 c4 04             	add    esp,0x4
+ 80486c7:	89 c1                	mov    ecx,eax
+ 80486c9:	31 c0                	xor    eax,eax
+ 80486cb:	8b 7d 08             	mov    edi,DWORD PTR [ebp+0x8]
+ 80486ce:	8a 55 0c             	mov    dl,BYTE PTR [ebp+0xc]
+
+080486d1 <mystery2_l1>:
+ 80486d1:	8a 1f                	mov    bl,BYTE PTR [edi]
+ 80486d3:	38 d3                	cmp    bl,dl
+ 80486d5:	74 04                	je     80486db <mystery2_l2>
+ 80486d7:	40                   	inc    eax
+ 80486d8:	47                   	inc    edi
+ 80486d9:	eb f6                	jmp    80486d1 <mystery2_l1>
+
+080486db <mystery2_l2>:
+ 80486db:	83 f9 00             	cmp    ecx,0x0
+ 80486de:	75 05                	jne    80486e5 <mystery2_l3>
+ 80486e0:	b8 ff ff ff ff       	mov    eax,0xffffffff
+
+080486e5 <mystery2_l3>:
+ 80486e5:	c9                   	leave  
+ 80486e6:	c3                   	ret    
+
+080486e7 <mystery3>:
+ 80486e7:	55                   	push   ebp
+ 80486e8:	89 e5                	mov    ebp,esp
+ 80486ea:	8b 5d 08             	mov    ebx,DWORD PTR [ebp+0x8]
+ 80486ed:	8b 55 0c             	mov    edx,DWORD PTR [ebp+0xc]
+ 80486f0:	8b 4d 10             	mov    ecx,DWORD PTR [ebp+0x10]
+
+080486f3 <mystery3_l1>:
+ 80486f3:	8a 03                	mov    al,BYTE PTR [ebx]
+ 80486f5:	8a 22                	mov    ah,BYTE PTR [edx]
+ 80486f7:	38 e0                	cmp    al,ah
+ 80486f9:	75 08                	jne    8048703 <mystery3_l2>
+ 80486fb:	43                   	inc    ebx
+ 80486fc:	42                   	inc    edx
+ 80486fd:	e2 f4                	loop   80486f3 <mystery3_l1>
+ 80486ff:	31 c0                	xor    eax,eax
+ 8048701:	eb 05                	jmp    8048708 <mystery3_l3>
+
+08048703 <mystery3_l2>:
+ 8048703:	b8 01 00 00 00       	mov    eax,0x1
+
+08048708 <mystery3_l3>:
+ 8048708:	c9                   	leave  
+ 8048709:	c3                   	ret    
+
+0804870a <mystery4>:
+ 804870a:	55                   	push   ebp
+ 804870b:	89 e5                	mov    ebp,esp
+ 804870d:	53                   	push   ebx
+ 804870e:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+ 8048711:	8b 5d 0c             	mov    ebx,DWORD PTR [ebp+0xc]
+ 8048714:	8b 4d 10             	mov    ecx,DWORD PTR [ebp+0x10]
+
+08048717 <mystery4_l1>:
+ 8048717:	8a 13                	mov    dl,BYTE PTR [ebx]
+ 8048719:	88 10                	mov    BYTE PTR [eax],dl
+ 804871b:	40                   	inc    eax
+ 804871c:	43                   	inc    ebx
+ 804871d:	e2 f8                	loop   8048717 <mystery4_l1>
+ 804871f:	5b                   	pop    ebx
+ 8048720:	c9                   	leave  
+ 8048721:	c3                   	ret    
+
+08048722 <mystery5>:
+ 8048722:	55                   	push   ebp
+ 8048723:	89 e5                	mov    ebp,esp
+ 8048725:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+ 8048728:	3c 30                	cmp    al,0x30
+ 804872a:	7c 0b                	jl     8048737 <mystery5_l1>
+ 804872c:	3c 39                	cmp    al,0x39
+ 804872e:	7f 07                	jg     8048737 <mystery5_l1>
+ 8048730:	b8 01 00 00 00       	mov    eax,0x1
+ 8048735:	eb 05                	jmp    804873c <mystery5_l2>
+
+08048737 <mystery5_l1>:
+ 8048737:	b8 00 00 00 00       	mov    eax,0x0
+
+0804873c <mystery5_l2>:
+ 804873c:	c9                   	leave  
+ 804873d:	c3                   	ret    
+
+0804873e <mystery6>:
+ 804873e:	55                   	push   ebp
+ 804873f:	89 e5                	mov    ebp,esp
+ 8048741:	8b 7d 08             	mov    edi,DWORD PTR [ebp+0x8]
+ 8048744:	57                   	push   edi
+ 8048745:	e8 56 ff ff ff       	call   80486a0 <mystery1>
+ 804874a:	83 c4 04             	add    esp,0x4
+ 804874d:	8b 7d 08             	mov    edi,DWORD PTR [ebp+0x8]
+ 8048750:	89 c1                	mov    ecx,eax
+ 8048752:	29 c4                	sub    esp,eax
+ 8048754:	89 eb                	mov    ebx,ebp
+ 8048756:	29 c3                	sub    ebx,eax
+
+08048758 <mystery6_l1>:
+ 8048758:	8a 54 0f ff          	mov    dl,BYTE PTR [edi+ecx*1-0x1]
+ 804875c:	88 13                	mov    BYTE PTR [ebx],dl
+ 804875e:	43                   	inc    ebx
+ 804875f:	e2 f7                	loop   8048758 <mystery6_l1>
+ 8048761:	50                   	push   eax
+ 8048762:	89 eb                	mov    ebx,ebp
+ 8048764:	29 c3                	sub    ebx,eax
+ 8048766:	53                   	push   ebx
+ 8048767:	57                   	push   edi
+ 8048768:	e8 9d ff ff ff       	call   804870a <mystery4>
+ 804876d:	83 c4 0c             	add    esp,0xc
+ 8048770:	c9                   	leave  
+ 8048771:	c3                   	ret    
+
+08048772 <mystery7>:
+ 8048772:	55                   	push   ebp
+ 8048773:	89 e5                	mov    ebp,esp
+ 8048775:	31 d2                	xor    edx,edx
+ 8048777:	31 db                	xor    ebx,ebx
+ 8048779:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+ 804877c:	83 ec 04             	sub    esp,0x4
+ 804877f:	c7 45 fc 00 00 00 00 	mov    DWORD PTR [ebp-0x4],0x0
+ 8048786:	50                   	push   eax
+ 8048787:	e8 14 ff ff ff       	call   80486a0 <mystery1>
+ 804878c:	83 c4 04             	add    esp,0x4
+ 804878f:	89 c1                	mov    ecx,eax
+ 8048791:	50                   	push   eax
+ 8048792:	53                   	push   ebx
+ 8048793:	51                   	push   ecx
+ 8048794:	52                   	push   edx
+ 8048795:	57                   	push   edi
+ 8048796:	8b 75 08             	mov    esi,DWORD PTR [ebp+0x8]
+ 8048799:	56                   	push   esi
+ 804879a:	e8 9f ff ff ff       	call   804873e <mystery6>
+ 804879f:	83 c4 04             	add    esp,0x4
+ 80487a2:	5f                   	pop    edi
+ 80487a3:	5a                   	pop    edx
+ 80487a4:	59                   	pop    ecx
+ 80487a5:	5b                   	pop    ebx
+ 80487a6:	58                   	pop    eax
+
+080487a7 <mystery7_l1>:
+ 80487a7:	8a 5c 0e ff          	mov    bl,BYTE PTR [esi+ecx*1-0x1]
+ 80487ab:	53                   	push   ebx
+ 80487ac:	53                   	push   ebx
+ 80487ad:	e8 70 ff ff ff       	call   8048722 <mystery5>
+ 80487b2:	83 c4 04             	add    esp,0x4
+ 80487b5:	83 f8 00             	cmp    eax,0x0
+ 80487b8:	74 19                	je     80487d3 <mystery7_l3>
+ 80487ba:	5b                   	pop    ebx
+ 80487bb:	80 eb 30             	sub    bl,0x30
+ 80487be:	53                   	push   ebx
+ 80487bf:	bb 0a 00 00 00       	mov    ebx,0xa
+ 80487c4:	8b 45 fc             	mov    eax,DWORD PTR [ebp-0x4]
+ 80487c7:	f7 e3                	mul    ebx
+ 80487c9:	5b                   	pop    ebx
+ 80487ca:	01 d8                	add    eax,ebx
+ 80487cc:	89 45 fc             	mov    DWORD PTR [ebp-0x4],eax
+ 80487cf:	e2 d6                	loop   80487a7 <mystery7_l1>
+ 80487d1:	eb 08                	jmp    80487db <mystery7_l2>
+
+080487d3 <mystery7_l3>:
+ 80487d3:	b8 ff ff ff ff       	mov    eax,0xffffffff
+ 80487d8:	83 c4 04             	add    esp,0x4
+
+080487db <mystery7_l2>:
+ 80487db:	c9                   	leave  
+ 80487dc:	c3                   	ret    
+
+080487dd <mystery8>:
+ 80487dd:	55                   	push   ebp
+ 80487de:	89 e5                	mov    ebp,esp
+ 80487e0:	83 ec 10             	sub    esp,0x10
+ 80487e3:	c7 45 fc 00 00 00 00 	mov    DWORD PTR [ebp-0x4],0x0
+ 80487ea:	c7 45 f8 00 00 00 00 	mov    DWORD PTR [ebp-0x8],0x0
+
+080487f1 <mystery8_l1>:
+ 80487f1:	8b 45 f8             	mov    eax,DWORD PTR [ebp-0x8]
+ 80487f4:	3b 45 10             	cmp    eax,DWORD PTR [ebp+0x10]
+ 80487f7:	73 56                	jae    804884f <mystery8_l2>
+ 80487f9:	8b 55 08             	mov    edx,DWORD PTR [ebp+0x8]
+ 80487fc:	8b 45 fc             	mov    eax,DWORD PTR [ebp-0x4]
+ 80487ff:	01 d0                	add    eax,edx
+ 8048801:	8a 00                	mov    al,BYTE PTR [eax]
+ 8048803:	3c 0a                	cmp    al,0xa
+ 8048805:	74 48                	je     804884f <mystery8_l2>
+ 8048807:	8b 55 08             	mov    edx,DWORD PTR [ebp+0x8]
+ 804880a:	8b 45 fc             	mov    eax,DWORD PTR [ebp-0x4]
+ 804880d:	01 d0                	add    eax,edx
+ 804880f:	8a 00                	mov    al,BYTE PTR [eax]
+ 8048811:	84 c0                	test   al,al
+ 8048813:	74 3a                	je     804884f <mystery8_l2>
+ 8048815:	8b 55 08             	mov    edx,DWORD PTR [ebp+0x8]
+ 8048818:	8b 45 fc             	mov    eax,DWORD PTR [ebp-0x4]
+ 804881b:	01 d0                	add    eax,edx
+ 804881d:	8a 10                	mov    dl,BYTE PTR [eax]
+ 804881f:	8b 4d 0c             	mov    ecx,DWORD PTR [ebp+0xc]
+ 8048822:	8b 45 f8             	mov    eax,DWORD PTR [ebp-0x8]
+ 8048825:	01 c8                	add    eax,ecx
+ 8048827:	8a 00                	mov    al,BYTE PTR [eax]
+ 8048829:	38 c2                	cmp    dl,al
+ 804882b:	74 09                	je     8048836 <mystery8_l3>
+ 804882d:	c7 45 f8 00 00 00 00 	mov    DWORD PTR [ebp-0x8],0x0
+ 8048834:	eb 04                	jmp    804883a <mystery8_l4>
+
+08048836 <mystery8_l3>:
+ 8048836:	83 45 f8 01          	add    DWORD PTR [ebp-0x8],0x1
+
+0804883a <mystery8_l4>:
+ 804883a:	8b 45 f8             	mov    eax,DWORD PTR [ebp-0x8]
+ 804883d:	3b 45 10             	cmp    eax,DWORD PTR [ebp+0x10]
+ 8048840:	75 07                	jne    8048849 <mystery8_l5>
+ 8048842:	b8 01 00 00 00       	mov    eax,0x1
+ 8048847:	eb 0b                	jmp    8048854 <mystery8_l6>
+
+08048849 <mystery8_l5>:
+ 8048849:	83 45 fc 01          	add    DWORD PTR [ebp-0x4],0x1
+ 804884d:	eb a2                	jmp    80487f1 <mystery8_l1>
+
+0804884f <mystery8_l2>:
+ 804884f:	b8 00 00 00 00       	mov    eax,0x0
+
+08048854 <mystery8_l6>:
+ 8048854:	c9                   	leave  
+ 8048855:	c3                   	ret    
+
+08048856 <mystery9>:
+ 8048856:	55                   	push   ebp
+ 8048857:	89 e5                	mov    ebp,esp
+ 8048859:	83 ec 18             	sub    esp,0x18
+ 804885c:	c7 45 f4 00 00 00 00 	mov    DWORD PTR [ebp-0xc],0x0
+ 8048863:	8b 45 0c             	mov    eax,DWORD PTR [ebp+0xc]
+ 8048866:	89 45 f0             	mov    DWORD PTR [ebp-0x10],eax
+ 8048869:	ff 75 14             	push   DWORD PTR [ebp+0x14]
+ 804886c:	e8 2f fe ff ff       	call   80486a0 <mystery1>
+ 8048871:	83 c4 04             	add    esp,0x4
+ 8048874:	89 45 ec             	mov    DWORD PTR [ebp-0x14],eax
+ 8048877:	8b 45 0c             	mov    eax,DWORD PTR [ebp+0xc]
+ 804887a:	89 45 f4             	mov    DWORD PTR [ebp-0xc],eax
+
+0804887d <mystery9_l1>:
+ 804887d:	8b 45 f4             	mov    eax,DWORD PTR [ebp-0xc]
+ 8048880:	3b 45 10             	cmp    eax,DWORD PTR [ebp+0x10]
+ 8048883:	73 51                	jae    80488d6 <mystery9_l2>
+ 8048885:	8b 55 08             	mov    edx,DWORD PTR [ebp+0x8]
+ 8048888:	8b 45 f4             	mov    eax,DWORD PTR [ebp-0xc]
+ 804888b:	01 d0                	add    eax,edx
+ 804888d:	8a 00                	mov    al,BYTE PTR [eax]
+ 804888f:	3c 0a                	cmp    al,0xa
+ 8048891:	75 3d                	jne    80488d0 <mystery9_l3>
+ 8048893:	8b 55 08             	mov    edx,DWORD PTR [ebp+0x8]
+ 8048896:	8b 45 f0             	mov    eax,DWORD PTR [ebp-0x10]
+ 8048899:	01 d0                	add    eax,edx
+ 804889b:	ff 75 ec             	push   DWORD PTR [ebp-0x14]
+ 804889e:	ff 75 14             	push   DWORD PTR [ebp+0x14]
+ 80488a1:	50                   	push   eax
+ 80488a2:	e8 36 ff ff ff       	call   80487dd <mystery8>
+ 80488a7:	83 c4 0c             	add    esp,0xc
+ 80488aa:	85 c0                	test   eax,eax
+ 80488ac:	0f 95 c0             	setne  al
+ 80488af:	84 c0                	test   al,al
+ 80488b1:	74 14                	je     80488c7 <mystery9_l4>
+ 80488b3:	8b 55 08             	mov    edx,DWORD PTR [ebp+0x8]
+ 80488b6:	8b 45 f0             	mov    eax,DWORD PTR [ebp-0x10]
+ 80488b9:	01 d0                	add    eax,edx
+ 80488bb:	83 ec 0c             	sub    esp,0xc
+ 80488be:	50                   	push   eax
+ 80488bf:	e8 68 f9 ff ff       	call   804822c <print_line>
+ 80488c4:	83 c4 10             	add    esp,0x10
+
+080488c7 <mystery9_l4>:
+ 80488c7:	8b 45 f4             	mov    eax,DWORD PTR [ebp-0xc]
+ 80488ca:	83 c0 01             	add    eax,0x1
+ 80488cd:	89 45 f0             	mov    DWORD PTR [ebp-0x10],eax
+
+080488d0 <mystery9_l3>:
+ 80488d0:	83 45 f4 01          	add    DWORD PTR [ebp-0xc],0x1
+ 80488d4:	eb a7                	jmp    804887d <mystery9_l1>
+
+080488d6 <mystery9_l2>:
+ 80488d6:	c9                   	leave  
+ 80488d7:	c3                   	ret    
