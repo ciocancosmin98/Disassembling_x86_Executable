@@ -3,8 +3,10 @@
   - Memory optimization: The executable file had to be as small as possible 
   - Speed optimization: The executable file had to fulfill its functions in as little time as possible( by removing useless operations and improving the time complexity of the functions used )
   
+  In the end, the memory optimization was underwhelming( at 90% of original size ) but the speed optimization was 3x faster
+  for an input file with a couple hundred lines.
  
- Disclaimer: Translation was done using an online resource. For original text( in romanian ) see ...
+ Disclaimer: Translation was done using an online resource. For original text( in romanian ) see README_Romanian
  
 I will assume the use of the CDECL convention for all functions.
 ______________________________________________________________________________
